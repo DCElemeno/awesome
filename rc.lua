@@ -136,6 +136,10 @@ mylauncher = awful.widget.launcher({
   image = beautiful.awesome_icon,
   menu = mymainmenu })
 
+mydisplaymanager = awful.widget.launcher({ 
+  image = beautiful.layout_floating,
+  menu = function() awful.util.spawn_with_shell("Arandr") end }})
+
 -- Menubar configuration
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
 -- }}}
@@ -241,6 +245,7 @@ awful.screen.connect_for_each_screen(function(s)
             --mybatterybar,
             volume_widget, sprtr,
             battery_widget, sprtr,
+            mydisplaymanager, sprtr,
             --require("battery-widget") {}, sprtr,
             mytextclock, sprtr,
             mylauncher,
