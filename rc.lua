@@ -42,8 +42,11 @@ end
 --beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
 beautiful.init(awful.util.getdir("config") .. "/themes/zenburn/theme.lua")
 
--- load the widget code
+-- {{{ DEFINE WIDGETS 
+-- Contains widgets for the top bar
 local volume_control = require("volume-control")
+-- define your volume control, using default settings:
+volumecfg = volume_control({})
 
 -- {{{ Battery bar
 mybatterybar = awful.widget.progressbar()
@@ -75,8 +78,7 @@ mytimer:start()
 mytimer:emit_signal("timeout")
 -- }}} 
 
--- define your volume control, using default settings:
-volumecfg = volume_control({})
+
 
 
 -- This is used later as the default terminal and editor to run.
@@ -109,7 +111,6 @@ awful.layout.layouts = {
 -- {{{ Helper functions
 local function client_menu_toggle_fn()
     local instance = nil
-
     return function ()
         if instance and instance.wibox.visible then
             instance:hide()
@@ -233,13 +234,14 @@ awful.screen.connect_for_each_screen(function(s)
         },
         s.mytasklist, -- Middle widget
         { -- Right widgets
-             sprtr,
+            sprtr,
             wibox.widget.systray(), sprtr,
             layout = wibox.layout.fixed.horizontal,
             volumecfg.widget, sprtr,
             mybatterybar,
             require("battery-widget") {}, sprtr,
             mytextclock, sprtr,
+            mymainmenu,
             --s.mylayoutbox,--
         },
     }
