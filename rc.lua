@@ -126,7 +126,7 @@ end
 mymainmenu = awful.menu({ items = { 
     { "reset (RE:testing, fixes system hangups)", awesome.restart },
     { "quit (RE:testing)", function() awesome.quit() end},
-    { "shutdown", awful.util.spawn_with_shell("poweroff") },
+    { "shutdown", function() awful.util.spawn_with_shell("poweroff") end },
     { "Debian", debian.menu.Debian_menu.Debian },
     { "open terminal", terminal }
   }
