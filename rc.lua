@@ -125,10 +125,9 @@ end
 -- {{{ Poweroff menu
 -- Create a launcher widget and a main menu
 mymainmenu = awful.menu({ items = { 
-    { "reset (RE:testing, fixes system hangups)", awesome.restart },
-    { "quit (RE:testing)", function() awesome.quit() end},
+    { "reset", awesome.restart },
+    { "logout", function() awesome.quit() end},
     { "shutdown", function() awful.util.spawn_with_shell("poweroff") end },
-    { "Debian", debian.menu.Debian_menu.Debian },
     { "open terminal", terminal }
   }
 })
