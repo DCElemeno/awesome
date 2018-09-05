@@ -138,7 +138,7 @@ mylauncher = awful.widget.launcher({
 
 mydisplaymanager = awful.widget.launcher({ 
   image = beautiful.layout_floating,
-  menu = function() awful.util.spawn_with_shell("Arandr") end }})
+  menu = function() awful.util.spawn_with_shell("Arandr") end })
 
 -- Menubar configuration
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
