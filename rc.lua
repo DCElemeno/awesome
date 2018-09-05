@@ -132,13 +132,18 @@ mymainmenu = awful.menu({ items = {
   }
 })
 
+mydisplaymenu = awful.menu({ items = { 
+    { "Display Options", function() awful.util.spawn_with_shell("arandr") end  },
+  }
+})
+
 mylauncher = awful.widget.launcher({ 
   image = beautiful.awesome_icon,
   menu = mymainmenu })
 
 mydisplaymanager = awful.widget.launcher({ 
   image = beautiful.layout_floating,
-  menu = function() awful.util.spawn_with_shell("Arandr") end })
+  menu = mydisplaymenu })
 
 -- Menubar configuration
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
