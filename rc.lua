@@ -235,7 +235,7 @@ awful.screen.connect_for_each_screen(function(s)
         s.mytasklist, -- Middle widget
         { -- Right widgets
             sprtr,
-            --wibox.widget.systray(), sprtr,
+            wibox.widget.systray(), sprtr,
             layout = wibox.layout.fixed.horizontal,
             volumecfg.widget, sprtr,
             mybatterybar,
@@ -600,6 +600,7 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 -- }}}
 
 --add in autostart --
-awful.util.spawn_with_shell("nm-applet &")
+awful.util.spawn_with_shell("pgrep -u $USER -x nm-applet > /dev/null || (nm-applet &)")
+--awful.util.spawn_with_shell("nm-applet &")
 awful.spawn("/home/checkfast/autorun.sh", { tag = root.tags()[1]})
 awful.spawn("/home/checkfast/projects/launchUpdater.sh", { tag = root.tags()[2]})
