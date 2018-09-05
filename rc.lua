@@ -7,6 +7,7 @@ local naughty = require("naughty")
 local menubar = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup").widget
 local debian = require("debian.menu")
+local battery_widget = require("awesome-wm-widgets.battery-widget.battery")
 require("awful.autofocus")
 require("awful.hotkeys_popup.keys")
 
@@ -77,11 +78,6 @@ mytimer:connect_signal("timeout", function()
 mytimer:start()
 mytimer:emit_signal("timeout")
 -- }}} 
-
-
-
---{{{ borrowed widgets }}}
-local battery_widget = require("awesome-wm-widgets.battery-widget.battery")
 
 
 -- This is used later as the default terminal and editor to run.
