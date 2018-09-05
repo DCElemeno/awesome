@@ -222,19 +222,20 @@ awful.screen.connect_for_each_screen(function(s)
     -- Create the wibox
     s.mywibox = awful.wibar({ position = "top", screen = s })
 
+    --{{{ TOP BAR
     -- Add widgets to the wibox
     s.mywibox:setup {
         layout = wibox.layout.align.horizontal,
         { -- Left widgets
             layout = wibox.layout.fixed.horizontal,
-            mylauncher,
+            --mylauncher,
             --s.mytaglist,--
             s.mypromptbox,
         },
         s.mytasklist, -- Middle widget
         { -- Right widgets
             sprtr,
-            wibox.widget.systray(), sprtr,
+            --wibox.widget.systray(), sprtr,
             layout = wibox.layout.fixed.horizontal,
             volumecfg.widget, sprtr,
             mybatterybar,
@@ -557,7 +558,9 @@ client.connect_signal("request::titlebars", function(c)
         end)
     )
 
-    awful.titlebar(c) : setup {
+
+-- {{{ TITLEBAR 
+awful.titlebar(c) : setup {
         { -- Left
             --awful.titlebar.widget.iconwidget(c),
             awful.titlebar.widget.titlewidget(c),

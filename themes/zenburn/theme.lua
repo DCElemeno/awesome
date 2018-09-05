@@ -88,7 +88,7 @@ theme.taglist_squares_unsel = theme_assets.taglist_squares_unsel(
 -- }}}
 
 -- {{{ Misc
-theme.awesome_icon           = themes_path .. "zenburn/layouts/max.png"
+theme.awesome_icon           = themes_path .. "zenburn/cf-icon.png"
 theme.menu_submenu_icon      = themes_path .. "default/submenu.png"
 -- }}}
 
