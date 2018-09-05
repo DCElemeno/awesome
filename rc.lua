@@ -47,33 +47,33 @@ local volume_control = require("volume-control")
 
 -- {{{ Battery bar
 mybatterybar = awful.widget.progressbar()
-mybatterybar:set_border_width(3)
 mybatterybar:set_border_color('#2C303B')
+mybatterybar:set_border_width(5)
 mybatterybar:set_background_color('#000000')
 mybatterybar:set_color('#FFFFFF')
-mybatterybar:set_width(30)
+mybatterybar:set_width(40)
 
 mytimer = timer({ timeout = 30 })
 mytimer:connect_signal("timeout", function()
-                                      f = io.popen('acpi -b', r)
-                                      state, percent = string.match(f:read(), 'Battery %d: (%w+), (%d+)%%')
-                                      f:close()
-                                      percent = tonumber(percent)/100
-                                      if state == 'Discharging' then
-                                        mybatterybar:set_color('#CCCC00')
-                                        if percent < 0.2 then
-                                          mybatterybar:set_color(theme.bg_urgent)
-                                        end
-                                      elseif state == 'Charging' then
-                                        mybatterybar:set_color('#66CC00')
-                                      else
-                                        mybatterybar:set_color(theme.bg_focus)
-                                      end
-                                      mybatterybar:set_value(percent)
-                                  end)
+      f = io.popen('acpi -b', r)
+      state, percent = string.match(f:read(), 'Battery %d: (%w+), (%d+)%%')
+      f:close()
+      percent = tonumber(percent)/100
+      if state == 'Discharging' then
+        mybatterybar:set_color('#CCCC00')
+        if percent < 0.2 then
+          mybatterybar:set_color('#E00000')
+        end
+      elseif state == 'Charging' then
+        mybatterybar:set_color('#66CC00')
+      else
+        mybatterybar:set_color('#66CC00')
+      end
+      mybatterybar:set_value(percent)
+  end)
 mytimer:start()
 mytimer:emit_signal("timeout")
--- }}}
+-- }}} 
 
 -- define your volume control, using default settings:
 volumecfg = volume_control({})
@@ -121,24 +121,12 @@ local function client_menu_toggle_fn()
 end
 -- }}}
 
--- {{{ Menu
+-- {{{ Poweroff menu
 -- Create a launcher widget and a main menu
-myawesomemenu = {
-   { "hotkeys", function() return false, hotkeys_popup.show_help end},
-   { "manual", terminal .. " -e man awesome" },
-   { "edit config", editor_cmd .. " " .. awesome.conffile },
-   { "restart", awesome.restart },
-   { "quit", function() awesome.quit() end}
-}
-
 mymainmenu = awful.menu({ items = { 
-    { "Files", function() awful.util.spawn("nemo") end},
-    { "Netflix", function() awful.util.spawn("google-chrome-stable https://www.netflix.com/browse") end},
-    { "Chromium", function() awful.util.spawn("chromium-browser") end},
-    { "Spotify", function() awful.util.spawn("spotify") end},
-    { "Gitkraken", function() awful.util.spawn("gitkraken") end},
-    { "Sublime", function() awful.util.spawn("subl") end},
-    { "Awesome", myawesomemenu, beautiful.awesome_icon },
+    { "reset (RE:testing, fixes system hangups)", awesome.restart },
+    { "quit (RE:testing)", function() awesome.quit() end},
+    { "shutdown", awful.util.spawn_with_shell("poweroff") },
     { "Debian", debian.menu.Debian_menu.Debian },
     { "open terminal", terminal }
   }
@@ -245,11 +233,11 @@ awful.screen.connect_for_each_screen(function(s)
         },
         s.mytasklist, -- Middle widget
         { -- Right widgets
-         	sprtr,
+             sprtr,
             wibox.widget.systray(), sprtr,
             layout = wibox.layout.fixed.horizontal,
             volumecfg.widget, sprtr,
-	    mybatterybar,
+            mybatterybar,
             require("battery-widget") {}, sprtr,
             mytextclock, sprtr,
             --s.mylayoutbox,--
@@ -269,14 +257,14 @@ root.buttons(gears.table.join(
 -- {{{ Key bindings
 globalkeys = gears.table.join(
     
-	-- TODO program launching mod + function keys
-	awful.key({ modkey }, "#67", function() awful.util.spawn("chromium-browser") end ),
-	awful.key({ modkey }, "#68", function() awful.util.spawn("nemo") end ),
-	awful.key({ modkey }, "#69", function() awful.util.spawn("subl") end ),
-	awful.key({ modkey }, "#70", function() awful.util.spawn("gitkraken") end ),
-	awful.key({ modkey }, "#71", function() awful.util.spawn("spotify") end ),
+    -- TODO program launching mod + function keys
+    awful.key({ modkey }, "#67", function() awful.util.spawn("chromium-browser") end ),
+    awful.key({ modkey }, "#68", function() awful.util.spawn("nemo") end ),
+    awful.key({ modkey }, "#69", function() awful.util.spawn("subl") end ),
+    awful.key({ modkey }, "#70", function() awful.util.spawn("gitkraken") end ),
+    awful.key({ modkey }, "#71", function() awful.util.spawn("spotify") end ),
 
-	-- volume widget stuff
+    -- volume widget stuff
     awful.key({}, "XF86AudioRaiseVolume", function() volumecfg:up() end),
     awful.key({}, "XF86AudioLowerVolume", function() volumecfg:down() end),
     awful.key({}, "XF86AudioMute",        function() volumecfg:toggle() end),
