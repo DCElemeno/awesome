@@ -80,6 +80,9 @@ mytimer:emit_signal("timeout")
 
 
 
+--{{{ borrowed widgets }}}
+local battery_widget = require("awesome-wm-widgets.battery-widget.battery")
+
 
 -- This is used later as the default terminal and editor to run.
 terminal = "gnome-terminal"-- "x-terminal-emulator"
@@ -239,6 +242,7 @@ awful.screen.connect_for_each_screen(function(s)
             layout = wibox.layout.fixed.horizontal,
             volumecfg.widget, sprtr,
             mybatterybar,
+            battery_widget, sprtr,
             require("battery-widget") {}, sprtr,
             mytextclock, sprtr,
             mylauncher,
