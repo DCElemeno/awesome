@@ -232,7 +232,7 @@ awful.screen.connect_for_each_screen(function(s)
             --s.mytaglist,--
             s.mypromptbox,
         },
-        { sprtr, },--s.mytasklist, -- Middle widget
+        s.mytasklist, -- Middle widget
         { -- Right widgets
             sprtr,
             wibox.widget.systray(), sprtr,
