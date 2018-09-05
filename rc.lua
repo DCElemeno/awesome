@@ -243,9 +243,8 @@ awful.screen.connect_for_each_screen(function(s)
         },
         s.mytasklist, -- Middle widget
         { -- Right widgets
-            sprtr,
+            layout = wibox.layout.fixed.horizontal, sprtr,
             wibox.widget.systray(), sprtr,
-            layout = wibox.layout.fixed.horizontal,
             volumecfg.widget, sprtr,
             --mybatterybar,
             volume_widget, sprtr,
