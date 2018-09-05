@@ -8,6 +8,7 @@ local menubar = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup").widget
 local debian = require("debian.menu")
 local battery_widget = require("awesome-wm-widgets.battery-widget.battery")
+local volume_widget = require("awesome-wm-widgets.volume-widget.volume")
 require("awful.autofocus")
 require("awful.hotkeys_popup.keys")
 
@@ -50,34 +51,34 @@ local volume_control = require("volume-control")
 volumecfg = volume_control({})
 
 -- {{{ Battery bar
-mybatterybar = awful.widget.progressbar()
-mybatterybar:set_border_color('#2C303B')
-mybatterybar:set_border_width(5)
-mybatterybar:set_background_color('#000000')
-mybatterybar:set_color('#FFFFFF')
-mybatterybar:set_width(40)
+-- mybatterybar = awful.widget.progressbar()
+-- mybatterybar:set_border_color('#2C303B')
+-- mybatterybar:set_border_width(5)
+-- mybatterybar:set_background_color('#000000')
+-- mybatterybar:set_color('#FFFFFF')
+-- mybatterybar:set_width(40)
 
-mytimer = timer({ timeout = 30 })
-mytimer:connect_signal("timeout", function()
-      f = io.popen('acpi -b', r)
-      state, percent = string.match(f:read(), 'Battery %d: (%w+), (%d+)%%')
-      f:close()
-      percent = tonumber(percent)/100
-      if state == 'Discharging' then
-        mybatterybar:set_color('#CCCC00')
-        if percent < 0.2 then
-          mybatterybar:set_color('#E00000')
-        end
-      elseif state == 'Charging' then
-        mybatterybar:set_color('#66CC00')
-      else
-        mybatterybar:set_color('#66CC00')
-      end
-      mybatterybar:set_value(percent)
-  end)
-mytimer:start()
-mytimer:emit_signal("timeout")
--- }}} 
+-- mytimer = timer({ timeout = 30 })
+-- mytimer:connect_signal("timeout", function()
+--       f = io.popen('acpi -b', r)
+--       state, percent = string.match(f:read(), 'Battery %d: (%w+), (%d+)%%')
+--       f:close()
+--       percent = tonumber(percent)/100
+--       if state == 'Discharging' then
+--         mybatterybar:set_color('#CCCC00')
+--         if percent < 0.2 then
+--           mybatterybar:set_color('#E00000')
+--         end
+--       elseif state == 'Charging' then
+--         mybatterybar:set_color('#66CC00')
+--       else
+--         mybatterybar:set_color('#66CC00')
+--       end
+--       mybatterybar:set_value(percent)
+--   end)
+-- mytimer:start()
+-- mytimer:emit_signal("timeout")
+-- -- }}} 
 
 
 -- This is used later as the default terminal and editor to run.
@@ -237,9 +238,10 @@ awful.screen.connect_for_each_screen(function(s)
             wibox.widget.systray(), sprtr,
             layout = wibox.layout.fixed.horizontal,
             volumecfg.widget, sprtr,
-            mybatterybar,
+            --mybatterybar,
+            volume_widget, sprtr,
             battery_widget, sprtr,
-            require("battery-widget") {}, sprtr,
+            --require("battery-widget") {}, sprtr,
             mytextclock, sprtr,
             mylauncher,
             --s.mylayoutbox,--
