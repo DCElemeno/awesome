@@ -154,7 +154,7 @@ mykeyboardlayout = awful.widget.keyboardlayout()
 
 -- {{{ Wibar
 -- Create a textclock widget
-mytextclock = awful.widget.textclock(" %l:%M%P", 15)
+mytextclock = awful.widget.textclock("%l:%M%P ", 15)
 --mytextclock = awful.widget.textclock(" %a %b %d, %l:%M%P", 15)
 sprtr = wibox.widget.textbox()
 sprtr:set_text("  ")
@@ -245,7 +245,7 @@ awful.screen.connect_for_each_screen(function(s)
         s.mytasklist, -- Middle widget
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal, sprtr,
-            wibox.widget.systray(), sprtr,
+            wibox.widget.systray(),
             volumecfg.widget, sprtr,
             --mybatterybar,
             volume_widget, sprtr,
