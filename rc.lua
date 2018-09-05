@@ -154,7 +154,8 @@ mykeyboardlayout = awful.widget.keyboardlayout()
 
 -- {{{ Wibar
 -- Create a textclock widget
-mytextclock = awful.widget.textclock(" %a %b %d, %l:%M%P", 15)
+mytextclock = awful.widget.textclock(" %l:%M%P", 15)
+--mytextclock = awful.widget.textclock(" %a %b %d, %l:%M%P", 15)
 sprtr = wibox.widget.textbox()
 sprtr:set_text("  ")
 
