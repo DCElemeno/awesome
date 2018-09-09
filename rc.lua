@@ -618,4 +618,4 @@ awful.util.spawn_with_shell("pgrep -u $USER -x nm-applet > /dev/null || (nm-appl
 awful.spawn("/home/checkfast/autorun.sh", { tag = root.tags()[1]})
 awful.spawn("/home/checkfast/projects/launchUpdater.sh", { tag = root.tags()[2]})
 
-awful.util.spawn_with_shell("./home/.config/awesome/ws_server_exe/smartlift_ws_server.sh --live")
+awful.util.spawn_with_shell("$HOME/.config/awesome/ws_server_exe/smartlift_ws_server --live -l /home/checkfast/projects/run -w /home/checkfast/projects/run")
