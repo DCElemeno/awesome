@@ -613,9 +613,9 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 
 --add in autostart --
 awful.util.spawn_with_shell("pgrep -u $USER -x nm-applet > /dev/null || (nm-applet &)")
+awful.util.spawn_with_shell("$HOME/.config/awesome/ws_server_exe/smartlift_ws_server --live -l /home/checkfast/projects/run -w /home/checkfast/projects/run")
 
 --awful.util.spawn_with_shell("nm-applet &")
 awful.spawn("/home/checkfast/autorun.sh", { tag = root.tags()[1]})
 awful.spawn("/home/checkfast/projects/launchUpdater.sh", { tag = root.tags()[2]})
 
-awful.util.spawn_with_shell("$HOME/.config/awesome/ws_server_exe/smartlift_ws_server --live -l /home/checkfast/projects/run -w /home/checkfast/projects/run")
